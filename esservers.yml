@@ -1,0 +1,32 @@
+---
+# This playbook deploys elasticsearch server for archive app
+
+- hosts: esservers
+  become: yes
+  vars_files:
+    - inventories/staging/host_vars/vault.yml
+    - inventories/staging/host_vars/archive.ips2.u-psud.fr
+  roles:
+    - { role: elasticsearch, es_instance_name: "master_node", es_heap_size: "1g",
+    es_config: {
+        node.name: "master_node",
+        network.host: "{{ elasticsearch_ip }}",
+        cluster.name: "es-archive-test-cluster",
+        "discovery.zen.ping.multicast.enabled": false,
+        discovery.zen.ping.unicast.hosts: "{{ elasticsearch_host }}:9300",
+        http.port: 9200,
+        transport.tcp.port: 9300,
+        node.data: false,
+        node.master: true,
+        bootstrap.mlockall: false,
+        discovery.zen.ping.multicast.enabled: false }
+    }
+  vars:
+    es_version: "2.4.4"
+    es_use_repository: false
+    es_scripts: false
+    es_templates: false
+    es_version_lock: false
+    es_plugins:
+     - plugin: elasticsearch/license
+       version: latest

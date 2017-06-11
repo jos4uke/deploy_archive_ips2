@@ -1,1 +1,4 @@
+# postgresql servers
 - include: dbservers.yml
+# elasticsearch servers
+- include: esservers.yml
