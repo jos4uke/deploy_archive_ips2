@@ -3,3 +3,6 @@ archive.ips2.u-psud.fr  ansible_connection=ssh        ansible_user=jtran-loc
 
 [esservers]
 archive.ips2.u-psud.fr  ansible_connection=ssh        ansible_user=jtran-loc
+
+[webservers]
+archive.ips2.u-psud.fr  ansible_connection=ssh        ansible_user=jtran-loc

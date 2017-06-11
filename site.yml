@@ -2,3 +2,5 @@
 - include: dbservers.yml
 # elasticsearch servers
 - include: esservers.yml
+# apache2 web servers
+- include: webservers.yml

@@ -26,3 +26,24 @@ postgresql_hba_entries:
 elasticsearch_host: archive.ips2.u-psud.fr
 elasticsearch_ip: 129.175.186.38
 
+# apache2 web
+web_host: archive.ips2.u-psud.fr
+web_ip: 129.175.186.38
+apache_listen_ip: "localhost, {{ web_ip }}"
+apache_listen_port: 5000
+apache_create_vhosts: true
+apache_vhosts_filename: "vhosts.conf"
+apache_vhosts_template: "vhosts.conf.j2"
+apache_remove_default_vhost: true
+apache_global_vhost_settings: |
+  DirectoryIndex index.php index.html
+apache_vhosts:
+  # Additional optional properties: 'serveradmin, serveralias, extra_parameters'.
+  - servername: "{{ web_host }}"
+    documentroot: "/var/www/html"
+pache_mods_enabled:
+  - rewrite.load
+apache_mods_disabled:
+  - deflate.load
+apache_state: started
+

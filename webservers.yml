@@ -1,0 +1,10 @@
+---
+# This playbook deploys apache2 server for archive app
+
+- hosts: webservers
+  become: yes
+  vars_files:
+    - inventories/staging/host_vars/vault.yml
+    - inventories/staging/host_vars/archive.ips2.u-psud.fr
+  roles:
+    - { role: geerlingguy.apache }
