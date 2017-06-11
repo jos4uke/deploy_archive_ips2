@@ -1,0 +1,24 @@
+postgres_host: archive.ips2.u-psud.fr
+postgres_ip: 129.175.186.38
+control_ip: 129.175.190.11
+control_ipv6: 2002::81af:be6f
+db_name: archive-test
+db_user: flocad-archive
+postgresql_databases:
+  - name: "{{ db_name }}"
+    owner: "{{ db_user }}"
+postgresql_users:
+  - name: "{{ db_user }}"
+    password: "{{ flocad_archive_pwd }}"
+postgresql_global_config_options:
+  - option: listen_addresses
+    value: 'localhost, {{ postgres_ip }}'
+postgresql_hba_entries:
+  - { type: local, database: all, user: postgres, auth_method: peer }
+  - { type: local, database: all, user: all, auth_method: peer }
+  - { type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5 }
+  - { type: host, database: all, user: all, address: '::1/128', auth_method: md5 }
+  - { type: local, database: "{{ db_name }}" , user: "{{ db_user}}", auth_method: md5 }
+  - { type: host, database: "{{ db_name }}" , user: "{{ db_user}}", address: '127.0.0.1/32', auth_method: md5 }
+  - { type: host, database: "{{ db_name }}" , user: "{{ db_user}}", address: '{{ control_ip }}/32', auth_method: md5 }
+  - { type: host, database: "{{ db_name }}" , user: "{{ db_user}}", address: '{{ control_ipv6 }}/128', auth_method: md5 }

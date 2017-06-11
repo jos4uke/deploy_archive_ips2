@@ -1,0 +1,2 @@
+[dbservers]
+archive.ips2.u-psud.fr  ansible_connection=ssh        ansible_user=jtran-loc

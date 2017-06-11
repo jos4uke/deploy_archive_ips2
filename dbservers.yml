@@ -1,0 +1,11 @@
+---
+# This playbook deploys postgresql server and archive app database and user
+
+- hosts: dbservers
+  become: yes
+  become_method: sudo
+  vars_files:
+    - inventories/staging/host_vars/vault.yml
+    - inventories/staging/host_vars/archive.ips2.u-psud.fr
+  roles:
+    - role: geerlingguy.postgresql
