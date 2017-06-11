@@ -5,6 +5,7 @@
   become: yes
   become_method: sudo
   vars_files:
+    - inventories/staging/group_vars/control
     - inventories/staging/host_vars/vault.yml
     - inventories/staging/host_vars/archive.ips2.u-psud.fr
   roles:
