@@ -7,3 +7,6 @@
 [submodule "roles/geerlingguy.apache"]
 	path = roles/geerlingguy.apache
 	url = https://github.com/geerlingguy/ansible-role-apache.git
+[submodule "roles/bbric-archive"]
+	path = roles/bbric-archive
+	url = git@laforge.ips2.u-psud.fr:joseph.tran/ansible-role-bbric-archive.git
