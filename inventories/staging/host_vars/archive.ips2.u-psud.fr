@@ -25,11 +25,12 @@ postgresql_hba_entries:
 # elasticsearch
 elasticsearch_host: archive.ips2.u-psud.fr
 elasticsearch_ip: 129.175.186.38
+elastic_url: "http://{{ elasticsearch_ip }}:9200"
 
 # apache2 web
 web_host: archive.ips2.u-psud.fr
 web_ip: 129.175.186.38
-apache_listen_ip: "localhost, {{ web_ip }}"
+apache_listen_ip: "127.0.0.1, {{ web_ip }}"
 apache_listen_port: 5000
 apache_create_vhosts: true
 apache_vhosts_filename: "vhosts.conf"
@@ -49,7 +50,7 @@ apache_state: started
 
 ### archive ###
 
-elastic_host: "{{ elasticsearch_host }}" 
+elastic_host: 127.0.0.1
 bbric_archive_http_url: "http://{{ web_host }}:5000"
 bbric_archive_http_root: "archive"
 bbric_archive_title: "BBRIC Archive test"
@@ -80,7 +81,7 @@ bbric_archive_irods_repo_type: "UNIX"
 
 #PostgreSQL connection
 db_name: "{{ dbname }}"
-db_host: "{{ postgres_host }}"
+db_host: 127.0.0.1
 db_port: "5432"
 db_username: "{{ dbuser }}"
 db_password: P3GQ8V5i
