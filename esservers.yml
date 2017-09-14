@@ -12,7 +12,6 @@
         node.name: "master_node",
         network.host: "{{ elasticsearch_ip }}",
         cluster.name: "es-archive-test-cluster",
-        "discovery.zen.ping.multicast.enabled": false,
         discovery.zen.ping.unicast.hosts: "{{ elasticsearch_host }}:9300",
         http.port: 9200,
         transport.tcp.port: 9300,
