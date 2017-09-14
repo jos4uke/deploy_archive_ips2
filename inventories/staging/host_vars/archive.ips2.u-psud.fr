@@ -1,26 +1,26 @@
 # postgresql
 postgres_host: archive.ips2.u-psud.fr
 postgres_ip: 129.175.186.38
-db_name: archive-test
-db_user: flocad-archive
+dbname: archive-test
+dbuser: flocad-archive
 postgresql_databases:
-  - name: "{{ db_name }}"
-    owner: "{{ db_user }}"
+  - name: "{{ dbname }}"
+    owner: "{{ dbuser }}"
 postgresql_users:
-  - name: "{{ db_user }}"
-    password: "{{ flocad_archive_pwd }}"
+  - name: "{{ dbuser }}"
+    password: P3GQ8V5i
 postgresql_global_config_options:
   - option: listen_addresses
-    value: 'localhost, {{ postgres_ip }}'
+    value: '127.0.0.1, {{ postgres_ip }}'
 postgresql_hba_entries:
   - { type: local, database: all, user: postgres, auth_method: peer }
   - { type: local, database: all, user: all, auth_method: peer }
   - { type: host, database: all, user: all, address: '127.0.0.1/32', auth_method: md5 }
   - { type: host, database: all, user: all, address: '::1/128', auth_method: md5 }
-  - { type: local, database: "{{ db_name }}" , user: "{{ db_user}}", auth_method: md5 }
-  - { type: host, database: "{{ db_name }}" , user: "{{ db_user}}", address: '127.0.0.1/32', auth_method: md5 }
-  - { type: host, database: "{{ db_name }}" , user: "{{ db_user}}", address: '{{ control_ip }}/32', auth_method: md5 }
-  - { type: host, database: "{{ db_name }}" , user: "{{ db_user}}", address: '{{ control_ipv6 }}/128', auth_method: md5 }
+  - { type: local, database: "{{ dbname }}" , user: "{{ dbuser}}", auth_method: md5 }
+  - { type: host, database: "{{ dbname }}" , user: "{{ dbuser}}", address: '127.0.0.1/32', auth_method: md5 }
+  - { type: host, database: "{{ dbname }}" , user: "{{ dbuser}}", address: '{{ control_ip }}/32', auth_method: md5 }
+  - { type: host, database: "{{ dbname }}" , user: "{{ dbuser}}", address: '{{ control_ipv6 }}/128', auth_method: md5 }
 
 # elasticsearch
 elasticsearch_host: archive.ips2.u-psud.fr
@@ -41,9 +41,47 @@ apache_vhosts:
   # Additional optional properties: 'serveradmin, serveralias, extra_parameters'.
   - servername: "{{ web_host }}"
     documentroot: "/var/www/html"
-pache_mods_enabled:
+apache_mods_enabled:
   - rewrite.load
 apache_mods_disabled:
   - deflate.load
 apache_state: started
+
+### archive ###
+
+elastic_host: "{{ elasticsearch_host }}" 
+bbric_archive_http_url: "http://{{ web_host }}:5000"
+bbric_archive_http_root: "archive"
+bbric_archive_title: "BBRIC Archive test"
+bbric_archive_admins: "joseph.tran@ips2.universite-paris-saclay.fr,joseph.tran@inra.fr"
+
+#FTP server Name and Port
+bbric_archive_ftp: "archive.ips2.u-psud.fr"
+bbric_archive_ftp_port: "24"
+##FTP Group Name (www-data MUST be in this group and stickybit added to ftp_repository_path)
+bbric_archive_ftp_group: "archiveftp"
+##Restrict FTP account creation to a list of institutes (identified by their Shibboleth EPPN)
+### --> empty = no restriction
+bbric_archive_ftp_eppn_restriction_regexp: "inra.fr"
+
+#Full path to your collection rawfiles repository
+bbric_archive_rawfiles_repo: "/mnt/archive/data"
+bbric_archive_client_mountpoint: "/mnt/archive/data/store"
+bbric_archive_client_symlinks_dir: "/mnt/archive/data/client"
+bbric_archive_incoming_ftp: "/mnt/archive/incoming/ftp"
+bbric_archive_incoming_http: "/mnt/archive/incoming/http"
+bbric_archive_incoming_http_tmp: "/mnt/archive/incoming/http_tmp"
+
+#iRODS
+## IRODS root or fix path to your collection rawfiles repository
+bbric_archive_irods_repo: "/mnt/archive/data/irods"
+bbric_archive_irods_bin_path: "irods_command_binary_path"
+bbric_archive_irods_repo_type: "UNIX"
+
+#PostgreSQL connection
+db_name: "{{ dbname }}"
+db_host: "{{ postgres_host }}"
+db_port: "5432"
+db_username: "{{ dbuser }}"
+db_password: P3GQ8V5i
 

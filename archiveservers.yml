@@ -1,0 +1,15 @@
+---
+# This playbook deploys archive app on webservers
+
+- hosts: archiveservers
+  become: yes
+  vars_files:
+    - inventories/staging/host_vars/vault.yml
+    - inventories/staging/host_vars/archive.ips2.u-psud.fr
+  tasks:
+    - name: install mailutils
+      apt:
+        name: mailutils
+        update_cache: yes
+  roles:
+    - { role: bbric-archive }

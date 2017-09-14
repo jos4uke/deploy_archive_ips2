@@ -4,3 +4,7 @@
 - include: esservers.yml
 # apache2 web servers
 - include: webservers.yml
+# ssmtp servers
+- include: smtpservers.yml
+# archive web servers
+- include: archiveservers.yml

@@ -1,0 +1,15 @@
+---
+# This playbook deploys smtp client for archive app
+
+- hosts: smtpservers
+  become: yes
+  vars_files:
+    - inventories/staging/host_vars/vault.yml
+    - inventories/staging/host_vars/archive.ips2.u-psud.fr
+  roles:
+    - { role: ssmtp-role }
+  vars:
+    ssmtp_mailhub_host: "smtp.u-psud.fr"
+    ssmtp_mailhub_port: 25
+    ssmtp_starttls: "YES"
+    ssmtp_hostname: "{{ web_host }}"

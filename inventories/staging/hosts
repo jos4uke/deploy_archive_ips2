@@ -6,3 +6,9 @@ archive.ips2.u-psud.fr  ansible_connection=ssh        ansible_user=jtran-loc
 
 [webservers]
 archive.ips2.u-psud.fr  ansible_connection=ssh        ansible_user=jtran-loc
+
+[archiveservers]
+archive.ips2.u-psud.fr  ansible_connection=ssh        ansible_user=jtran-loc
+
+[smtpservers]
+archive.ips2.u-psud.fr  ansible_connection=ssh        ansible_user=jtran-loc

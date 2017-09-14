@@ -10,3 +10,6 @@
 [submodule "roles/bbric-archive"]
 	path = roles/bbric-archive
 	url = git@laforge.ips2.u-psud.fr:joseph.tran/ansible-role-bbric-archive.git
+[submodule "roles/ssmtp-role"]
+	path = roles/ssmtp-role
+	url = https://github.com/functionallyliterate/ssmtp-role.git
